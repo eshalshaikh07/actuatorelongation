@@ -29,7 +29,7 @@ function calculateElongation(pitch, roll, heave, actuatorNumber) {
     const pitchFactorNegative = 0.34; // Adjusted factor for negative pitch (10 / 29)
     const rollFactorPositive = 0.69;  // Adjusted factor for positive roll (20 / 29)
     const rollFactorNegative = 0.34;  // Adjusted factor for negative roll (10 / 29)
-    const heaveFactor = 1.0;
+    const heaveFactor = 2;            //Adjusted factor for heave (10/5)
     const adjustmentFactor = 0.1;    // Small measure for adjustment
     const maxPositiveElongation = 20;
     const maxNegativeElongation = -10; // Maximum negative elongation
@@ -85,3 +85,18 @@ function calculateElongation(pitch, roll, heave, actuatorNumber) {
 
     return elongation;
 }
+
+function generateRandomInputs() {
+    const pitch = (Math.random() * 59) - 29; // Generate random pitch between -29 and +30
+    const roll = (Math.random() * 59) - 29;  // Generate random roll between -29 and +30
+    const heave = Math.floor(Math.random() * 10) -4; // Generate random heave between 0 and 2
+
+    document.getElementById('pitch').value = pitch.toFixed(2);
+    document.getElementById('roll').value = roll.toFixed(2);
+    document.getElementById('heave').value = heave;
+
+    document.getElementById('inputForm').dispatchEvent(new Event('submit'));
+}
+
+// Automatically take random inputs every 10ms
+setInterval(generateRandomInputs, 1000);
